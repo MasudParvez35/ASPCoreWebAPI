@@ -1,3 +1,4 @@
+using ASPCoreWebAPI.Cache;
 using ASPCoreWebAPI.Data;
 using Microsoft.EntityFrameworkCore;
 
@@ -14,6 +15,9 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<MyDbContext>(options => options.UseSqlServer(
     builder.Configuration.GetConnectionString("DefaultConnection")
 ));
+
+builder.Services.AddScoped<IcacheService, CacheService>();
+builder.Services.AddScoped<ConnectionHelper>();
 
 // Add CORS policy to allow requests from Angular app
 builder.Services.AddCors(options =>
